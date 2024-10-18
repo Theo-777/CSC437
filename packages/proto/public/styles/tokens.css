@@ -24,10 +24,10 @@
   --color-text-heading: var(--color-accent);
   --color-text-inverted: rgb(255 255 255);
 
-  --font-family-body: Kanit, "Trebuchet MS", "Calibri", "Roboto",
-    "Segoe UI", "Ubuntu", "sans-serif";
-  --font-family-display: Trebuchet MS, "Calibri", "Roboto",
-    "Segoe UI", "Ubuntu", sans-serif;
+  --font-family-body:  Poppins ,Kanit, Trebuchet MS, Calibri, Roboto,
+    Segoe UI, Ubuntu, sans-serif;
+  --font-family-display: Poppins, Trebuchet MS, Calibri, Roboto,
+    Segoe UI, Ubuntu, sans-serif;
 
   --font-line-height-body: 1.5;
   --font-line-height-compact: 1.25;
