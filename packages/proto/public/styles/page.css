@@ -2,6 +2,19 @@ body {
   font-family: var(--font-family-body);
   background-color: var(--color-background-page);
 }
+section {
+    ul {
+    display: flex;
+    flex-direction: row;
+    gap: var(--size-spacing-medium);
+    grid-column: highlights / end;
+    list-style: none;
+    padding: 1em;
+    line-height: var(--font-line-height-compact);
+  }
+
+}
+
 header {
   background-color: var(--color-background-header);
   color: var(--color-text-inverted);
@@ -67,4 +80,15 @@ svg.icon {
   vertical-align: top;
   fill: currentColor;
 }
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--size-spacing-medium);
+    background-color: var(--color-background-header);
+    color: var(--color-text-inverted);
+}
+
+
 }

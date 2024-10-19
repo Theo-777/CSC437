@@ -1,0 +1,5 @@
+.team {
+  display: grid;
+  justify-content: end;
+  grid-template-columns: [start] 1fr 1fr 1fr 1fr 1fr 1fr [end];
+}
