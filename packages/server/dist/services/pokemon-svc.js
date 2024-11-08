@@ -18,35 +18,30 @@ var __copyProps = (to, from, except, desc) => {
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var pokemon_svc_exports = {};
 __export(pokemon_svc_exports, {
-  getPokemon: () => getPokemon
+  default: () => pokemon_svc_default
 });
 module.exports = __toCommonJS(pokemon_svc_exports);
-const pokemons = {
-  politoed: {
-    name: "Politoed",
-    description: "Politoed is a green, bipedal, amphibian Pok\xE9mon with yellow hands, belly, throat, and toes that resembles a frog. It has a long, curled hair on top of its head and pink cheek spots that are smaller on the female than on the male.",
-    imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/186.png",
-    type: "Water",
-    evolutions: [
-      {
-        name: "Poliwag",
-        stage: "Base Stage",
-        type: "Water",
-        imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/060.png"
-      },
-      {
-        name: "Poliwhirl",
-        stage: "First Evolution",
-        type: "Water",
-        imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/061.png"
-      }
-    ]
-  }
-};
-function getPokemon(_) {
-  return pokemons["politoed"];
-}
-// Annotate the CommonJS export names for ESM import in node:
-0 && (module.exports = {
-  getPokemon
+var import_mongoose = require("mongoose");
+const EvolutionSchema = new import_mongoose.Schema({
+  name: { type: String, required: true },
+  stage: { type: String, required: true },
+  type: { type: String, required: true },
+  imageUrl: { type: String }
 });
+const PokemonSchema = new import_mongoose.Schema({
+  name: { type: String, required: true },
+  description: { type: String },
+  imageUrl: { type: String },
+  type: { type: String, required: true },
+  evolutions: [EvolutionSchema]
+});
+const PokemonModel = (0, import_mongoose.model)("Pokemon", PokemonSchema);
+function index() {
+  return PokemonModel.find();
+}
+function get(name) {
+  return PokemonModel.find({ name }).then((list) => list[0]).catch(() => {
+    throw `${name} Not Found`;
+  });
+}
+var pokemon_svc_default = { index, get };

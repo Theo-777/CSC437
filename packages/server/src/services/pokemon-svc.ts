@@ -1,30 +1,36 @@
 // src/services/pokemon-svc.ts
-import {Pokemon, PokemonType, EvolutionStage} from "../models/pokemon";
+// src/models/pokemon.ts (Example)
+import { Pokemon } from "../models/pokemon";
+import { Schema, model } from "mongoose";
 
-const pokemons = {
-  politoed: {
-    name: "Politoed",
-    description:
-      "Politoed is a green, bipedal, amphibian Pokémon with yellow hands, belly, throat, and toes that resembles a frog. It has a long, curled hair on top of its head and pink cheek spots that are smaller on the female than on the male.",
-    imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/186.png",
-    type: "Water" as PokemonType,
-    evolutions: [
-      {
-          name: "Poliwag",
-          stage: "Base Stage" as EvolutionStage,
-          type: "Water" as PokemonType,
-          imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/060.png"
-      },
-      {
-          name: "Poliwhirl",
-          stage: "First Evolution" as EvolutionStage,
-          type: "Water" as PokemonType,
-          imageUrl: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/061.png"
-      }
-    ]
-  },
-};
+const EvolutionSchema = new Schema({
+  name: { type: String, required: true },
+  stage: { type: String, required: true },
+  type: { type: String, required: true },
+  imageUrl: { type: String }
+});
 
-export function getPokemon(_: string) {
-  return pokemons["politoed"];
+const PokemonSchema = new Schema({
+  name: { type: String, required: true },
+  description: { type: String },
+  imageUrl: { type: String },
+  type: { type: String, required: true },
+  evolutions: [EvolutionSchema]
+});
+
+const PokemonModel = model<Pokemon>("Pokemon", PokemonSchema);
+
+function index(): Promise<Pokemon[]> {
+  return PokemonModel.find();
 }
+
+function get(name: string): Promise<Pokemon> {
+  return PokemonModel.find({ name })
+    .then((list) => list[0])
+    .catch(() => {
+      throw `${name} Not Found`; // Throw an error if not found
+    });
+}
+
+
+export default { index, get };

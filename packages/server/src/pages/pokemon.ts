@@ -10,7 +10,7 @@ export class PokemonPage {
         this.data = data;
     }
 
-    render() {
+     render() {
         return renderPage({
             body: this.renderBody(),
             stylesheets: ["/styles/pokemon.css"],

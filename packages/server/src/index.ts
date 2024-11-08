@@ -1,7 +1,11 @@
 // src/index.ts
 import express, { Request, Response } from "express";
-import {getPokemon} from "./services/pokemon-svc";
 import {PokemonPage} from "./pages/pokemon";
+import { connect } from "./services/mongo";
+import Pokemon from "./services/pokemon-svc";
+
+connect("PokemonDB"); // use your own db name here
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,16 +19,16 @@ app.get("/hello", (req: Request, res: Response) => {
 
 // Assuming Express is already imported and `app` is initialized
 
-app.get(
-  "/pokemon/:pokemonId",
-  (req: Request, res: Response) => {
-    const { pokemonId } = req.params;
-    const data = getPokemon(pokemonId);
-    const page = new PokemonPage(data);
+app.get("/pokemon/:name", (req: Request, res: Response) => {
+  const { name } = req.params;
 
-    res.set("Content-Type", "text/html").send(page.render());
-  }
-);
+  Pokemon.get(name).then((data) => {
+      const page = new PokemonPage(data); // Create an instance of PokemonPage
+      res
+      .set("Content-Type", "text/html")
+      .send(page.render());
+  });
+});
 
 
 app.listen(port, () => {
