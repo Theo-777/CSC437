@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"></html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="styles/reset.css" />
@@ -9,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title></title>
   </head>
   <body>
     <header>
@@ -21,6 +21,9 @@
       <h1>
         Made by Theo Sprouse
       </h1>
+      <label>
+        <input type="checkbox" id="darkModeToggle"> Toggle Dark Mode
+      </label>
     </header>
     <section>
       <h2>Pages</h2>
@@ -32,5 +35,18 @@
         <li><a href="format.html">Format</a></li>
       </ul>
     </section>
+    <script>
+        document.body.addEventListener('change', function(event) {
+        // Check if the event target is the checkbox
+        if (event.target.id === 'darkModeToggle') {
+          if (event.target.checked) {
+            // Add the "dark-mode" class if checked
+            event.currentTarget.classList.add('dark-mode');
+          } else {
+            // Remove the "dark-mode" class if unchecked
+            event.currentTarget.classList.remove('dark-mode');
+          }
+        }
+      });</script>
   </body>
 </html>

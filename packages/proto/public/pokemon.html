@@ -1,12 +1,26 @@
 <!DOCTYPE html>
-<html lang="en"></html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="styles/page.css" />
     <link rel="stylesheet" href = "styles/tokens.css" />
     <link rel="stylesheet" href = "styles/pokemon.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@calpoly/mustang": "https://unpkg.com/@calpoly/mustang"
+        }
+      }
+    </script>
+    <script type="module">
+      import { define } from "@calpoly/mustang";
+      import { PokemonElement } from "/scripts/pokemon.js";
+      define({
+        "pokemon-info": PokemonElement,
+      });
 
+    </script>
+    <title>Pokemon</title>
   </head>
   <body>
       <header>
@@ -14,7 +28,7 @@
         <h1>Politoed</h1>
       </header>
       <section class="synopsis">
-        <div><img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full//186.png"></div>
+        <div><img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full//186.png" alt = "Politoed"></div>
         <div>Politoed is a green, bipedal, amphibian Pokemon with yellow hands, belly, throat, and toes that resembles a frog. It has a long, curled hair on top of its head and pink cheek spots that are smaller on the female than on the male. There is a green swirl on its belly. Its legs are well developed and it has bulbous toes and fingers. <br>
           Politoed acts as a leader to Poliwag and Poliwhirl, which gather from afar upon hearing its cry. Politoed likes to expand its throat and sing. When three or more assemble, they sing in a chorus with a loud, bellowing voice. The curled hair on Politoed's head is considered proof of its status as a king. The longer and curlier Politoed's hair is, the more Poliwag and Poliwhirl will obey it, and the more it is respected by other Politoed. Politoed is rarely found in the wild, though it is usually seen living by the water's edge. <br>
           At nightfall, Politoed appears near lakes to make territorial claims through cries that sound like shouting. A male Politoed's cry is said to be louder than a female Politoed's cry. A male Politoed with a deep, menacing voice will become more popular with the opposite gender.</div>
@@ -26,15 +40,17 @@
             <dd>First Evolution</dd>
             <dd>Water Type</dd>
           </dl>
-        <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full//061.png">
+        <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full//061.png" alt = "Poliwhirl">
         </a>
         <a href="poliwag.html">
           <dl>
-            <dt>Poliwag</dt>
-            <dd>Base Stage</dd>
-            <dd>Water Type</dd>
+            <pokemon-info>
+              <span slot="name">Poliwag</span>
+              <span slot="stage">Base Stage</span>
+              <span slot=Type">Water Type</span>
+              <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full//060.png" alt="Poliwag">
+            </pokemon-info>
           </dl>
-          <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full//060.png">
         </a>
       </nav>
   </body>
