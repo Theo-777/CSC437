@@ -44,4 +44,23 @@ function get(name) {
     throw `${name} Not Found`;
   });
 }
-var pokemon_svc_default = { index, get };
+function create(json) {
+  const t = new PokemonModel(json);
+  return t.save();
+}
+function update(name, pokemon) {
+  return PokemonModel.findOneAndUpdate({ name }, pokemon, {
+    new: true
+  }).then((updated) => {
+    if (!updated) throw `${name} not updated`;
+    else return updated;
+  });
+}
+function remove(name) {
+  return PokemonModel.findOneAndDelete({ name }).then(
+    (deleted) => {
+      if (!deleted) throw `${name} not deleted`;
+    }
+  );
+}
+var pokemon_svc_default = { index, get, create, update, remove };

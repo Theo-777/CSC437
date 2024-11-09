@@ -32,5 +32,30 @@ function get(name: string): Promise<Pokemon> {
     });
 }
 
+function create(json: Pokemon): Promise<Pokemon> {
+  const t = new PokemonModel(json);
+  return t.save();
+}
 
-export default { index, get };
+function update(
+  name: String,
+  pokemon: Pokemon
+): Promise<Pokemon> {
+  return PokemonModel.findOneAndUpdate({ name }, pokemon, {
+    new: true
+  }).then((updated) => {
+    if (!updated) throw `${name} not updated`;
+    else return updated as Pokemon;
+  });
+}
+
+function remove(name: String): Promise<void> {
+  return PokemonModel.findOneAndDelete({name}).then(
+      (deleted) => {
+        if (!deleted) throw `${name} not deleted`;
+      }
+  );
+}
+
+
+export default { index, get, create, update, remove};

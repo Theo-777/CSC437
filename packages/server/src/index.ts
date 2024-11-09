@@ -3,6 +3,8 @@ import express, { Request, Response } from "express";
 import {PokemonPage} from "./pages/pokemon";
 import { connect } from "./services/mongo";
 import Pokemon from "./services/pokemon-svc";
+import Pokemons from "./routes/pokemons";
+
 
 connect("PokemonDB"); // use your own db name here
 
@@ -12,6 +14,10 @@ const port = process.env.PORT || 3000;
 const staticDir = process.env.STATIC || "public";
 
 app.use(express.static(staticDir));
+
+app.use(express.json());
+app.use("/api/pokemons", Pokemons);
+
 
 app.get("/hello", (req: Request, res: Response) => {
     res.send("Hello, World");
