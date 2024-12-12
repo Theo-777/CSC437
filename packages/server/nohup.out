@@ -1,0 +1,20 @@
+
+> server@1.0.0 start:app
+> cross-env STATIC=../app/dist npm run start
+
+
+> server@1.0.0 start
+> npm run build && npm run start:node
+
+
+> server@1.0.0 build
+> npx etsc
+
+Using default config
+Built in: 43.265ms
+
+> server@1.0.0 start:node
+> node dist/index.js
+
+Connecting to MongoDB at mongodb+srv://theosprouse:<password>@pokemondb.sb3rw.mongodb.net/PokemonDB
+Server running at http://localhost:3000

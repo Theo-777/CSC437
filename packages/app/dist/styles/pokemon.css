@@ -1,0 +1,24 @@
+.evolution{
+display: flex;
+justify-content: space-evenly;
+
+}
+
+ dl {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+dt {
+    text-align: center;
+}
+
+dd {
+    margin-left: 0;
+}
+
+dt, dd {
+    border: 1px solid lightgray;
+    padding: 0 1em;
+}
+
