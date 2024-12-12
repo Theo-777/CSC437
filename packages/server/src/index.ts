@@ -4,7 +4,10 @@ import {PokemonPage} from "./pages/pokemon";
 import { connect } from "./services/mongo";
 import Pokemon from "./services/pokemon-svc";
 import Pokemons from "./routes/pokemons";
-
+import auth, { authenticateUser } from "./routes/auth";
+import { LoginPage } from "./pages/auth";
+import fs from "node:fs/promises";
+import path from "path";
 
 connect("PokemonDB"); // use your own db name here
 
@@ -16,7 +19,15 @@ const staticDir = process.env.STATIC || "public";
 app.use(express.static(staticDir));
 
 app.use(express.json());
-app.use("/api/pokemons", Pokemons);
+app.use("/api/pokemons", authenticateUser, Pokemons);
+app.use("/auth", auth);
+
+app.use("/app", (req: Request, res: Response) => {
+  const indexHtml = path.resolve(staticDir, "index.html");
+  fs.readFile(indexHtml, { encoding: "utf8" }).then((html) =>
+    res.send(html)
+  );
+});
 
 
 app.get("/hello", (req: Request, res: Response) => {
@@ -34,6 +45,11 @@ app.get("/pokemon/:name", (req: Request, res: Response) => {
       .set("Content-Type", "text/html")
       .send(page.render());
   });
+});
+
+app.get("/login", (req: Request, res: Response) => {
+  const page = new LoginPage();
+  res.set("Content-Type", "text/html").send(page.render());
 });
 
 

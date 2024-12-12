@@ -1,0 +1,11 @@
+.rules{
+    display: grid;
+  grid-column: 1 / span;
+  grid-template-columns:
+    subgrid
+    [start] [header] [subheader] [] [timings] [] [highlights] [] [end];
+  gap: var(--size-spacing-medium);
+  align-items: baseline;
+  margin: var(--size-spacing-small);
+
+}
